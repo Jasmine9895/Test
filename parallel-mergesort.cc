@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sort.hh"
+//#include "omp.h"
 
 void seqMerge(keytype* arr,int start,int middle,int end)
 {
@@ -83,6 +84,12 @@ void seqMergeSort(keytype* arr, int start,int end)
 void parallelSort (int N, keytype* A)
 {
   /* Lucky you, you get to start from scratch */
+	// #pragma omp parallel
+	// {
+	// 	int id = omp_get_thread_num();
+	// 	printf("hello %d ",id);
+	// 	print("world %d\n",id);
+	// }
 	seqMergeSort(A,0,N-1);				
 }
 
