@@ -61,9 +61,9 @@ main (int argc, char* argv[])
 	  t_seq, 1e-6 * N / t_seq);
   assertIsSorted (N, A_seq);
 
-  for(int i=0;i<N;i++) printf("%lu ",A_seq[i]);
+//  for(int i=0;i<N;i++) printf("%lu ",A_seq[i]);
 
-  printf("\n");  
+  printf("\n");
 
   /* Sort in parallel, calling YOUR routine. */
   keytype* A_par = newCopy (N, A_in);
@@ -77,7 +77,7 @@ main (int argc, char* argv[])
 
   assertIsSorted (N, A_par);
 
-  for(int i=0;i<N;i++) printf("%lu ",A_par[i]);
+//  for(int i=0;i<N;i++) printf("%lu ",A_par[i]);
 
   printf("\n");
 

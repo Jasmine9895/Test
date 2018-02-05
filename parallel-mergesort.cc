@@ -21,13 +21,20 @@ void seqMerge(keytype* arr,int start,int middle,int end)
 
 	//Copy first part in A and second part in B
 
-	keytype* A = newKeys(len_a);
-	memcpy(A,arr+start,len_a*sizeof(keytype));
+//	keytype* A = newKeys(len_a);
+//	memcpy(A,arr+start,len_a*sizeof(keytype));
 
-	keytype* B = newKeys(len_b);
-	memcpy(B,arr + middle,len_b*sizeof(keytype));
+		keytype A[len_a];
+		keytype B[len_b];
 
-	
+		for(int i=0;i<len_a;i++) A[i] = arr[i+start];
+
+	  for(int i=0;i<len_b;i++) B[i] = arr[i+middle];
+
+//	keytype* B = newKeys(len_b);
+//	memcpy(B,arr + middle,len_b*sizeof(keytype));
+
+
 			while(position_a < len_a && position_b < len_b)
 			{
 				if(A[position_a] < B[position_b])
@@ -68,7 +75,7 @@ void seqMerge(keytype* arr,int start,int middle,int end)
 int binary_search(keytype* arr,int val,int len_arr)
 {
   //Should return index of array such that arr[index] <= val
-  
+
   int start = 0;
   int end = len_arr-1;
   int mid = (start+end)/2;
@@ -84,7 +91,7 @@ int binary_search(keytype* arr,int val,int len_arr)
       {
           end = mid-1;
       }
-      else 
+      else
       {
           start = mid +1;
       }
@@ -102,13 +109,13 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
 {
   //middle is whether the second array starts
   //Initialize vectors A and B and copy elements
-  
 
-  if(start>= middle || middle>end || start>=end) 
+
+  if(start>= middle || middle>end || start>=end)
   {
-    
+
     return;
-  } 
+  }
   if(end-start==1)
   {
     //This case is when there are only 2 elements to be merged
@@ -136,7 +143,7 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
   memcpy(B,arr + middle,len_b*sizeof(keytype));
 
   int mid_a = len_a/2;
-  
+
   keytype v = A[mid_a];
   int k = binary_search(B,v,len_b);
 
@@ -196,7 +203,7 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
       parallel_merge(arr,start,p,q-1);
 
   }
- 
+
 }
 
 void seqMergeSort(keytype* arr, int start,int end)
@@ -219,7 +226,7 @@ void parMergeSort(keytype* arr, int start,int end)
 
   parMergeSort(arr,start,mid-1);
   parMergeSort(arr,mid,end); //here mid is the beginning of the second array
-  
+
   parallel_merge(arr,start,mid,end);
   return;
 
@@ -241,15 +248,15 @@ void parallelSort (int N, keytype* A)
  // printf("Before sort\n");
   //for(int i=0;i<N;i++) printf("%lu ",A[i]);
 
-  int sp =1;
+  int sp =0;
 	if(sp == 0)
   {
-    seqMergeSort(A,0,N-1);	
+    seqMergeSort(A,0,N-1);
   }
   else
   {
-    parMergeSort(A,0,N-1);  
-  }			
+    parMergeSort(A,0,N-1);
+  }
  // printf("\nAfter sort\n");
 
  // for(int i=0;i<N;i++) printf("%lu ",A[i]);
@@ -263,28 +270,28 @@ void parallelSort (int N, keytype* A)
 using namespace std;
 void merge(int arr[], int start, int middle, int end)
 {
- 
+
   //middle is whether the second array starts
-  
+
   //Initialize vectors A and B and copy elements
-  
-  
-  
-  
-  
+
+
+
+
+
   int position_a=0,position_b=0;
   int len_a = middle-start;
   int len_b = end-middle+1;
   int position_arr = start;
-  
+
   vector<int> A(len_a,0);
   vector<int> B(len_b,0);
-  
+
   for(int i=0;i<len_a;i++) A[i] = arr[i+start];
-  
+
   for(int i=0;i<len_b;i++) B[i] = arr[i+middle];
-  
-   
+
+
   while(position_a < len_a && position_b < len_b)
   {
     if(A[position_a] < B[position_b])
@@ -298,7 +305,7 @@ void merge(int arr[], int start, int middle, int end)
       arr[position_arr] = B[position_b];
       position_b ++;
       position_arr++;
-      
+
     }
   }
   if(position_a < len_a)
@@ -315,11 +322,11 @@ void merge(int arr[], int start, int middle, int end)
     {
       arr[position_arr] = B[i];
        position_arr++;
-       
+
     }
   }
-  
-  
+
+
 }
 
 
@@ -331,26 +338,26 @@ void mergeSort(int arr[], int start, int end)
   mergeSort(arr,mid,end); //here mid is the beginning of the second array
   merge(arr,start,mid,end);
   return;
-  
-  
+
+
 }
 
 int main() {
   cout<<"Hello";
-  
 
- 
+
+
   int array[10] = {5,8,2,3,9,1,0,9,-3,8};
   int n = 10;
     mergeSort(array, 0, n-1);
- 
+
     cout<<"\n Array after sorting : ";
- 
+
     for(int i=0;i<n;i++)
      cout<<array[i]<<" ";
- 
+
   return 0;
-  
+
 }
 
 
