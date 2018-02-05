@@ -72,12 +72,11 @@ void seqMerge(keytype* arr,int start,int middle,int end)
 
 
 }
-int binary_search(keytype* arr,int val,int len_arr)
+int binary_search(keytype* arr,int val,int len_arr,int start,int end)
 {
   //Should return index of array such that arr[index] <= val
 
-  int start = 0;
-  int end = len_arr-1;
+
   int mid = (start+end)/2;
 
   while(start<=end)
@@ -105,6 +104,9 @@ int binary_search(keytype* arr,int val,int len_arr)
 
 }
 
+
+
+
 void parallel_merge(keytype* arr,int start,int middle,int end)
 {
   //middle is whether the second array starts
@@ -129,25 +131,35 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
     return;
   }
 
-  int position_a=0,position_b=0;
+  // int position_a=start,position_b=middle;
+	int position_a=0,position_b=0;
   int len_a = middle-start;
   int len_b = end-middle+1;
   int position_arr = start;
 
+
   //Copy first part in A and second part in B
 
-  keytype* A = newKeys(len_a);
-  memcpy(A,arr+start,len_a*sizeof(keytype));
+	keytype A[len_a];
+	keytype B[len_b];
 
-  keytype* B = newKeys(len_b);
-  memcpy(B,arr + middle,len_b*sizeof(keytype));
+	for(int i=0;i<len_a;i++) A[i] = arr[i+start];
+
+	for(int i=0;i<len_b;i++) B[i] = arr[i+middle];
+
+  // keytype* A = newKeys(len_a);
+  // memcpy(A,arr+start,len_a*sizeof(keytype));
+  //
+  // keytype* B = newKeys(len_b);
+  // memcpy(B,arr + middle,len_b*sizeof(keytype));
 
   int mid_a = len_a/2;
 
   keytype v = A[mid_a];
-  int k = binary_search(B,v,len_b);
+  //int k = binary_search(B,v,len_b,middle,end);
+	int k = binary_search(B,v,len_b,0,len_b-1);
 
-  if(k>=0 && k<len_b)
+  if(k>=middle && k<end+1)
   {
     int p = start+mid_a;
     int q = p+k+1;
@@ -248,7 +260,7 @@ void parallelSort (int N, keytype* A)
  // printf("Before sort\n");
   //for(int i=0;i<N;i++) printf("%lu ",A[i]);
 
-  int sp =0;
+  int sp =1;
 	if(sp == 0)
   {
     seqMergeSort(A,0,N-1);
