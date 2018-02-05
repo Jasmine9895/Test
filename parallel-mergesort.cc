@@ -115,7 +115,11 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
 
   if(start>= middle || middle>end || start>=end)
   {
+<<<<<<< HEAD
 
+=======
+    printf("return from parallel merge\n");
+>>>>>>> parent of 2ee78ea... Print statements now commented
     return;
   }
   if(end-start==1)
@@ -128,6 +132,16 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
       arr[end]= temp;
 
     }
+<<<<<<< HEAD
+=======
+
+    printf("Sorted array is");
+    for(int i=start;i<=end;i++) printf("%d ", arr[i]);
+
+      printf("\n");
+    printf("Returning from parallel_merge\n");
+
+>>>>>>> parent of 2ee78ea... Print statements now commented
     return;
   }
 
@@ -140,12 +154,32 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
 
   //Copy first part in A and second part in B
 
+<<<<<<< HEAD
 	keytype A[len_a];
 	keytype B[len_b];
 
 	for(int i=0;i<len_a;i++) A[i] = arr[i+start];
 
 	for(int i=0;i<len_b;i++) B[i] = arr[i+middle];
+=======
+    printf("Values in A: ");
+  for(int i=0;i<len_a;i++){
+
+
+    printf("%d ", A[i]);
+  } 
+
+  printf("\n");
+  printf("Values in B: ");
+  for(int i=0;i<len_b;i++)
+  {
+
+    printf("%d ", B[i]);
+  } 
+  printf("\n");
+
+  printf("Callling binary_search for value %d at index %d in A\n",v,mid_a);
+>>>>>>> parent of 2ee78ea... Print statements now commented
 
   // keytype* A = newKeys(len_a);
   // memcpy(A,arr+start,len_a*sizeof(keytype));
@@ -153,7 +187,13 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
   // keytype* B = newKeys(len_b);
   // memcpy(B,arr + middle,len_b*sizeof(keytype));
 
+<<<<<<< HEAD
   int mid_a = len_a/2;
+=======
+  //3 cases > all , < all, middle
+  //value returned such that B[k] <=v
+  printf("binary_search result value = %d at index %d in B\n",B[k],k);
+>>>>>>> parent of 2ee78ea... Print statements now commented
 
   keytype v = A[mid_a];
   //int k = binary_search(B,v,len_b,middle,end);
@@ -189,10 +229,24 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
   }
   else if(k<0)
   {
+<<<<<<< HEAD
     //all elements in B are greater than mid-point of A
     //a1b1a2b2, there is no b1, as all elements are greater than mid-point of a, so there is just b2, which includes all of b
     //so we can directly call parallel merge , no need to modify elements , just modify the call(just a1b1b2)
    parallel_merge(arr,start+mid_a+1,middle,end); //mid_a + 1 as have to merge a2b, mid_a is in a1
+=======
+    printf("k<0 case:\n");
+
+    //all elements in B are greater than mid-point of A
+    //a1b1a2b2, there is no b1, as all elements are greater than mid-point of a, so there is just b2, which includes all of b
+    //so we can directly call parallel merge , no need to modify elements , just modify the call(just a1b1b2)
+    int st = start+mid_a+1;
+    int  m= middle;
+    int  e =end;
+
+    printf("Calling parallel_merge st= arr[%d] = %d, mid =arr[%d]= %d , end = arr[%d]=%d\n",st,arr[st],m,arr[m],e,arr[e]);
+      parallel_merge(arr,start+mid_a+1,middle,end); //mid_a + 1 as have to merge a2b, mid_a is in a1
+>>>>>>> parent of 2ee78ea... Print statements now commented
 
   }
   else if(k>=len_b)
@@ -215,6 +269,32 @@ void parallel_merge(keytype* arr,int start,int middle,int end)
       parallel_merge(arr,start,p,q-1);
 
   }
+<<<<<<< HEAD
+=======
+  printf("Completed parallel merge for \n");
+  printf("Values in A: ");
+  for(int i=0;i<len_a;i++){
+
+
+    printf("%d ", A[i]);
+  } 
+
+  printf("\n");
+  printf("Values in B: ");
+  for(int i=0;i<len_b;i++)
+  {
+
+    printf("%d ", B[i]);
+  } 
+
+  printf("\n final result\n");
+  for(int i=start;i<=end;i++)
+  {
+    printf("%d ", arr[i]);
+  }
+
+  printf("\n----------------\n");
+>>>>>>> parent of 2ee78ea... Print statements now commented
 
 }
 
@@ -236,9 +316,17 @@ void parMergeSort(keytype* arr, int start,int end)
   if(start>=end) return;
   int mid = int((start+end+1)/2);
 
+<<<<<<< HEAD
   parMergeSort(arr,start,mid-1);
   parMergeSort(arr,mid,end); //here mid is the beginning of the second array
 
+=======
+  printf("Calling merge Sort : start: %lu, mid= %lu, end=%lu\n",start,mid,end);
+  parMergeSort(arr,start,mid-1);
+  parMergeSort(arr,mid,end); //here mid is the beginning of the second array
+  
+  printf("Calling merge: : start: %lu, mid= %lu, end=%lu\n",start,mid,end);
+>>>>>>> parent of 2ee78ea... Print statements now commented
   parallel_merge(arr,start,mid,end);
   return;
 
@@ -257,8 +345,8 @@ void parallelSort (int N, keytype* A)
 	// 	print("world %d\n",id);
 	// }
 
- // printf("Before sort\n");
-  //for(int i=0;i<N;i++) printf("%lu ",A[i]);
+  printf("Before sort\n");
+  for(int i=0;i<N;i++) printf("%lu ",A[i]);
 
   int sp =1;
 	if(sp == 0)
@@ -267,11 +355,17 @@ void parallelSort (int N, keytype* A)
   }
   else
   {
+<<<<<<< HEAD
     parMergeSort(A,0,N-1);
   }
  // printf("\nAfter sort\n");
+=======
+    parMergeSort(A,0,N-1);  
+  }			
+  printf("\nAfter sort\n");
+>>>>>>> parent of 2ee78ea... Print statements now commented
 
- // for(int i=0;i<N;i++) printf("%lu ",A[i]);
+  for(int i=0;i<N;i++) printf("%lu ",A[i]);
 }
 
 /* eof */
